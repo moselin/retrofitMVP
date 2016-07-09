@@ -3,11 +3,11 @@ package com.moselin.moslmvp.mvp.view;
 
 
 /**
- * @Description
+ * @Description 请求一般对加载框处理的接口
  * @Author MoseLin
  * @Date 2016/6/24.
  */
-public interface ILoadingView
+public interface ILoadingViewI extends IBaseView
 {
     /**
      * 正在请求中显示加载框

@@ -4,27 +4,25 @@ import android.util.Log;
 
 import com.moselin.demo.activity.MainActivity;
 import com.moselin.demo.mvp.model.WechatEntity;
-import com.moselin.moslmvp.mvp.view.IMPLBaseView;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import okhttp3.ResponseBody;
+
 /**
  * @Description
  * @Author MoseLin
- * @Date 2016/6/29.
+ * @Date 2016/7/8.
  */
-public class WechatView extends IMPLBaseView<WechatEntity>
+public class WechatViewImpl implements IWechatView
 {
-
-
     private final MainActivity activity;
 
-    public WechatView(MainActivity mainActivity)
+    public WechatViewImpl(MainActivity mainActivity)
     {
         this.activity = mainActivity;
     }
-
     @Override
     public String getPath()
     {
@@ -42,14 +40,34 @@ public class WechatView extends IMPLBaseView<WechatEntity>
     }
 
     @Override
-    public void onError(String msg)
+    public void onError(int code,String msg)
     {
-        Log.v("Tag",msg);
+        Log.v("Tag","code:"+code+";msg:"+msg);
     }
 
     @Override
     public void onCompleted(WechatEntity entity)
     {
         activity.refreshUi(entity);
+    }
+
+    @Override
+    public void onDownload(ResponseBody entity)
+    {
+        activity.refreshDownloadUi(entity);
+    }
+
+    @Override
+    public void progress(final long progress, final long total, final boolean done)
+    {
+        if (!done)
+            activity.runOnUiThread(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    activity.updateProgress(progress,total,done);
+                }
+            });
     }
 }

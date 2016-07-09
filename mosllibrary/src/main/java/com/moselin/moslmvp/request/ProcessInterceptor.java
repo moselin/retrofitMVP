@@ -8,7 +8,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- * @Description
+ * @Description 下载或上传请求时添加进度指示的过虑器
  * @Author MoseLin
  * @Date 2016/7/4.
  */

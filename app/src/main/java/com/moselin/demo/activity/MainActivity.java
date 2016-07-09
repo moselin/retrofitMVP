@@ -4,12 +4,13 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.widget.TextView;
 
-import com.moselin.demo.mvp.model.WechatRequestModel;
 import com.moselin.demo.mvp.model.WechatEntity;
-import com.moselin.demo.mvp.view.WechatView;
+import com.moselin.demo.mvp.model.WechatModeImpl;
+import com.moselin.demo.mvp.view.WechatViewImpl;
+import com.moselin.demo.mvp.presenter.WechatPresenter;
+import com.moselin.demo.mvp.view.IWechatView;
 import com.moselin.moslmvp.R;
 import com.moselin.moslmvp.activity.PresenterActivity;
-import com.moselin.moslmvp.mvp.presenter.RequestPresenter;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -18,10 +19,9 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import okhttp3.ResponseBody;
 
-public class MainActivity extends PresenterActivity
+public class MainActivity extends PresenterActivity<WechatPresenter>
 {
 
     @Bind(R.id.tvTitle)
@@ -34,15 +34,12 @@ public class MainActivity extends PresenterActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-        WechatView view = new WechatView(this);
-        RequestPresenter<WechatEntity> presenter = new RequestPresenter<>(view, new WechatRequestModel<WechatEntity>());
-        presenter.doRequest();
-        addPresenterToList(presenter);
-//        DownloadView downloadView = new DownloadView(this);
-//        DownloadPresenter<ResponseBody> downloadPresenter = new DownloadPresenter<>(downloadView,new DownloadModel<ResponseBody>());
-//        downloadPresenter.doRequest();
-//        addPresenterToList(downloadPresenter);
+        IWechatView wechatView = new WechatViewImpl(this);
+        presenter.setModel(new WechatModeImpl());
+        presenter.setView(wechatView);
+//        presenter.setModelView(new WechatModeImpl(),new WechatViewImpl(this));
+//        presenter.getWechat();
+        presenter.down();
     }
 
     public void refreshUi(WechatEntity entity)

@@ -7,8 +7,17 @@ package com.moselin.moslmvp.mvp.presenter;
  */
 public interface IPresenterCallback<E>
 {
+    /**
+     * 请求完成
+     * @param entity 实体类泛型
+     */
      void onCompleted(E entity);
 
-     void onError(String msg);
+     /**
+      * 请求发生错误
+      * @param code 错误码
+      * @param msg 提示信息
+      */
+     void onError(int code, String msg);
 
 }

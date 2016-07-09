@@ -6,7 +6,7 @@ import retrofit2.adapter.rxjava.HttpException;
 import rx.Subscriber;
 
 /**
- * @Description
+ * @Description 重写RxJava的订阅者
  * @Author MoseLin
  * @Date 2016/6/24.
  */
@@ -32,9 +32,9 @@ public class RequestSubscriber<E> extends Subscriber<E>
             if (code == 504) {
                 msg = "网络出错了啦";
             }
-            callback.onError(msg);
+            callback.onError(code,msg);
         } else {
-            callback.onError(e.getMessage());
+            callback.onError(-1,e.getMessage());
         }
     }
 

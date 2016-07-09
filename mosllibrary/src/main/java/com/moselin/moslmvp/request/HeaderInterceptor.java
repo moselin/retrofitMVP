@@ -8,7 +8,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- * @Description
+ * @Description 为请求添加header的过虑器
  * @Author MoseLin
  * @Date 2016/7/4.
  */

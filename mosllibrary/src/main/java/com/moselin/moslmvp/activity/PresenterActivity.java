@@ -2,41 +2,43 @@ package com.moselin.moslmvp.activity;
 
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
 
 import com.moselin.moslmvp.mvp.presenter.BasePresenter;
+import com.moselin.moslmvp.util.TUitl;
 
-import java.util.ArrayList;
-import java.util.List;
+import butterknife.ButterKnife;
 
 /**
- * @Description
+ * @Description 要用Mvp模式activity须继承此类
  * @Author MoseLin
  * @Date 2016/7/6.
  */
-public abstract class PresenterActivity extends AppCompatActivity
+public abstract class PresenterActivity<P extends BasePresenter> extends AppCompatActivity
 {
-    protected List<BasePresenter> presenters = new ArrayList<>();
+    protected P presenter;
+
 
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState)
+    protected void onCreate(Bundle savedInstanceState)
     {
-        super.onCreate(savedInstanceState, persistentState);
+        super.onCreate(savedInstanceState);
+        presenter = TUitl.getT(this,0);
     }
 
-    /**
-     * 如果有presenter必须加入到list中
-     * @param presenter what extends BasePresenter
-     */
-    protected void addPresenterToList(BasePresenter presenter){
-        presenters.add(presenter);
+    @Override
+    public void setContentView(@LayoutRes int layoutResID)
+    {
+        super.setContentView(layoutResID);
+        ButterKnife.bind(this);//bind 注解
     }
 
     @Override
     protected void onDestroy()
     {
         super.onDestroy();
-        for (BasePresenter presenter : presenters)
-        presenter.unRigistRx();
+        if (presenter != null) presenter.unRigistRx();
+        ButterKnife.unbind(this);//unbind 注解
     }
 }

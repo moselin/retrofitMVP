@@ -27,7 +27,7 @@ public class App extends Application
         header.put("Accept-Encoding", "gzip, deflate");
         header.put("Connection", "keep-alive");
         header.put("Accept", "*/*");
-//        Mosl.init(this,"http://119.147.33.16/dd.myapp.com/",header);
-        Mosl.init(this,"http://v.juhe.cn",header);
+        Mosl.init(this,"http://119.147.33.16/dd.myapp.com/",header);
+//        Mosl.init(this,"http://v.juhe.cn",header);
     }
 }

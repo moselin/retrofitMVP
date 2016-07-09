@@ -11,13 +11,13 @@ import okio.Okio;
 import okio.Source;
 
 /**
- * @Description
+ * @Description 对下载请求返回的正文进行特殊处理，添加进度指示
  * @Author MoseLin
  * @Date 2016/7/4.
  */
 public class ProgressResponseBody extends ResponseBody
 {
-    private ProgressListener listener;
+    private ProgressListener listener;//进度监听
     private ResponseBody body;
     private BufferedSource bufferedSource;
 

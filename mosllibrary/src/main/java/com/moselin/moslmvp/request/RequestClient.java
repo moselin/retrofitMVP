@@ -47,6 +47,12 @@ public class RequestClient
         return builder.build();
     }
 
+    /**
+     *
+     * @param url 域名
+     * @param client okhttp请求客户端
+     * @return retrofit的构建器
+     */
     @NonNull
     private Retrofit.Builder getBuilder(String url, OkHttpClient client)
     {

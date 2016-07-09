@@ -1,11 +1,11 @@
 package com.moselin.moslmvp.mvp.view;
 
 /**
- * @Description
+ * @Description 下载请求一般都可以直接继承或实现此接口
  * @Author MoseLin
  * @Date 2016/7/5.
  */
-public interface IDownloadView<E> extends IBaseView<E>
+public interface IDownloadView<E> extends ICommonView<E>
 {
     /**
      * 显示进度
